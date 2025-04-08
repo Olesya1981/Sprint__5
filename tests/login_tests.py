@@ -2,10 +2,7 @@ from locators import *
 from data import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from helpers import *
 from conftest import driver
-
-login, email, password = baza()
 
 
 class TestLogin:
@@ -20,7 +17,7 @@ class TestLogin:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of_element_located(PROFILE))
         profile = driver.find_element(*PROFILE).text
         assert profile == "Профиль"
-        driver.quit()
+
 
     # вход через кнопку «Личный кабинет»,
     def test_personal_account_button_authorisation(self, driver):  #
@@ -33,7 +30,6 @@ class TestLogin:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of_element_located(PROFILE))
         profile = driver.find_element(*PROFILE).text
         assert profile == "Профиль"
-        driver.quit()
 
     # вход через кнопку в форме регистрации,
     def test_login_button_in_registration_form_authorisation(self, driver):
@@ -46,7 +42,7 @@ class TestLogin:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of_element_located(PROFILE))
         profile = driver.find_element(*PROFILE).text
         assert profile == "Профиль"
-        driver.quit()
+
 
     # вход через кнопку в форме восстановления пароля.
     def test_login_button_in_forgot_password_form_authorisation(self, driver):
@@ -59,4 +55,3 @@ class TestLogin:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of_element_located(PROFILE))
         profile = driver.find_element(*PROFILE).text
         assert profile == "Профиль"
-        driver.quit()

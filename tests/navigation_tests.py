@@ -2,10 +2,7 @@ from locators import *
 from data import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from helpers import *
 from conftest import driver
-
-login, email, password = baza()
 
 
 class TestNavigation:
@@ -21,7 +18,7 @@ class TestNavigation:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of_element_located(PROFILE))
         profile = driver.find_element(*PROFILE).text
         assert profile == "Профиль"
-        driver.quit()
+
 
     # Переход из личного кабинета в конструктор
     def test_navigation_from_personal_account_to_constructor(self, driver):
@@ -35,7 +32,7 @@ class TestNavigation:
         driver.find_element(*CONSTRUCTOR_BUTTON).click()
         constructor_text = driver.find_element(*CONSTRUCT_BURGER).text
         assert constructor_text == 'Соберите бургер'
-        driver.quit()
+
 
     def test_navigation_from_personal_account_to_logo_stellar_burgers(self, driver):
         driver.get(Urls.main_url)
@@ -48,4 +45,4 @@ class TestNavigation:
         driver.find_element(*LOGO_BUTTON).click()
         check = driver.find_element(*CONSTRUCT_BURGER_XPATH).text
         assert check == 'Соберите бургер'
-        driver.quit()
+

@@ -20,17 +20,16 @@ class TestRegistration:
         WebDriverWait(driver, 2).until(expected_conditions.visibility_of_element_located(ENTER_FORM))
         assert driver.find_element(*ENTER_FORM).text == 'Вход', \
             "Форма регистрации работает с ошибкой"
-        driver.quit()
+
 
     # регистрация с некорректным паролем
     def test_invalid_password_error(self, driver):
-        error_message = 'Некорректный пароль'
         driver.get(Urls.login_url)
         driver.find_element(*REGISTRATION_BUTTON).click()
         driver.find_element(*REGISTRATION_NAME_FIELD).send_keys(login)
         driver.find_element(*REGISTRATION_EMAIL_BUTTON).send_keys(email)
         driver.find_element(*REGISTRATION_PASSWORD_BUTTON).send_keys(incorrect_password)
         driver.find_element(*REGISTRATION_BUTTON_FINAL).click()
-        WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(INVALID_PASSWORD_ERROR))
+        WebDriverWait(driver, 2).until(expected_conditions.visibility_of_element_located(INVALID_PASSWORD_ERROR))
+        error_message = 'Некорректный пароль'
         assert driver.find_element(*INVALID_PASSWORD_ERROR).text == error_message
-        driver.quit()
